@@ -1,0 +1,18 @@
+<launch>
+
+    <param name="initial_pose_x" type="double" value="0"/>
+    <param name="initial_pose_y" type="double" value="0"/>
+    <param name="initial_pose_orientation" type="double" value="0"/>
+
+    <node pkg="project1" name="velocity_publisher" type="velocity_publisher"/>
+    <node pkg="project1" name="odometry" type="odometry" output="screen"/>
+    <node pkg="project1" name="odom_to_baselink_tf" type="odom_to_baselink_tf" output="screen"/>
+    
+    <node pkg="rviz" name="odom_gtpose_comparison" type="rviz" args="-d $(find project1)/rviz/odom_gtpose_comparison.rviz"/>
+    <node pkg="rviz" name="rviz_odom_to_baselink" type="rviz" args="-d $(find project1)/rviz/odom_to_baselink.rviz"/>
+
+    <node pkg="rqt_reconfigure" name="reconfigure_gui" type="rqt_reconfigure"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_odom" args="-0.67825673 -0.631779108 0 0 0 0.638459 0.7696558 world odom 100"/>
+
+</launch>
